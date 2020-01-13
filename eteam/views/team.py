@@ -16,8 +16,11 @@ def create_team():
     target=request.form['target']
     progress=request.form['progress']
     need=request.form['need']
+    resume = request.form['resume']
 
-    db.session.add(Team(manager_name=manager_name,creater_id=me.id,team_name=team_name,target=target,progress=progress,need=need))
+    db.session.add(
+        Team(manager_name=manager_name, creater_id=me.id, team_name=team_name, target=target, progress=progress,
+             need=need, resume=resume))
     db.session.commit()
 
     return jsonify(success=0,msg='成功添加队伍')
@@ -61,6 +64,7 @@ def update_team():
     target = request.form['target']
     progress = request.form['progress']
     need = request.form['need']
+    resume = request.form['resume']
 
 
     team=Team.query.filter_by(id=id)
@@ -72,6 +76,7 @@ def update_team():
     team.target=target
     team.progress=progress
     team.need=need
+    team.resume = resume
 
     db.session.commit()
 

@@ -32,6 +32,7 @@ class Team(db.Model):
     manager_name=db.Column(db.String(80))
     team_name=db.Column(db.String(60))
     target=db.Column(db.String(20))#比赛
+    resume = db.Column(db.Text)  # 队伍简介
     progress=db.Column(db.Text)#进度
     need=db.Column(db.String(20))#r人员需求
     img_url=db.relationship('TeamImage')
