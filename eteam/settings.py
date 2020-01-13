@@ -1,7 +1,7 @@
 import os
 db_account='eteam'
 db_password='@Aa123456'
-db_server='49.232.170.122:3306'
+db_server='localhost:3306'
 SQLALCHEMY_DATABASE_URI = 'mysql://'+db_account+':'+db_password+'@'+db_server+'/testdb1' #数据库设置
 
 SECRET_KEY='secret_key'
