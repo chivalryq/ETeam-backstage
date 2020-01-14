@@ -4,7 +4,8 @@ from ..models import Team
 from .user import find_user
 team_mod=Blueprint("team", __name__)
 
-@team_mod.route('/create_team', method=['POST'])
+
+@team_mod.route('/create_team', methods=['POST'])
 def create_team():
     openid=request.form['openid']
     me=find_user(openid)
@@ -35,7 +36,8 @@ def find_all_team():
     teams=me.teams
     return jsonify(success=0,teams=teams,msg='successfully get teams')
 
-@team_mod.route('/delete_team', method=['POST'])
+
+@team_mod.route('/delete_team', methods=['POST'])
 def delete_team():
     openid = request.form['openid']
     me = find_user(openid)
@@ -52,7 +54,7 @@ def delete_team():
     return jsonify(success=0, msg='delete successfully')
 
 
-@team_mod.route('/update_team', method=['POST'])
+@team_mod.route('/update_team', methods=['POST'])
 def update_team():
     openid = request.form['openid']
     me = find_user(openid)

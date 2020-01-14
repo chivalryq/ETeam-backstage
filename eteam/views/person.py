@@ -36,7 +36,8 @@ def get_person():
 
     return jsonify(success=0,person=person,msg='successfully get person')
 
-@person_mod.route('/update_person', method=['POST'])
+
+@person_mod.route('/update_person', methods=['POST'])
 def update_person():
     pass
 

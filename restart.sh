@@ -1,1 +1,1 @@
-pkill gunicorncd /root/ETeam-backstagesource eteam-env/bin/activategunicorn run:app  -b 0.0.0.0:5000 -w 4  -Ddeactive
+pid=`cat run.pid`echo ${pid}kill -9 ${pid}cd /root/ETeam-backstagesource eteam-env/bin/activategunicorn app:app  -b 0.0.0.0:5123 -w 4 -p run.pid -Ddeactivate
