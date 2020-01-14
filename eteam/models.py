@@ -29,12 +29,14 @@ class Person(db.Model):
 class Team(db.Model):
     __tablename__ = 'team'
     id=db.Column(db.Integer,primary_key=True)
+
     manager_name=db.Column(db.String(80))
-    team_name=db.Column(db.String(60))
+    major = db.Column(db.String(10))  # 负责人专业
     target=db.Column(db.String(20))#比赛
     resume = db.Column(db.Text)  # 队伍简介
-    progress=db.Column(db.Text)#进度
-    need=db.Column(db.String(20))#r人员需求
+    progress = db.Column(db.Text)  # 项目进度
+    need = db.Column(db.String(20))  #人员需求
+
     img_url=db.relationship('TeamImage')
     creater_id=db.Column(db.Integer,db.ForeignKey('user.id'))
 

@@ -12,15 +12,16 @@ def create_team():
     if not me:
         return jsonify(success=1,msg='User not found or not login')
 
-    team_name=request.form['team_name']
+
     manager_name=request.form['manager_name']
+    major = request.form['major']
     target=request.form['target']
+    resume = request.form['resume']
     progress=request.form['progress']
     need=request.form['need']
-    resume = request.form['resume']
 
     db.session.add(
-        Team(manager_name=manager_name, creater_id=me.id, team_name=team_name, target=target, progress=progress,
+        Team(manager_name=manager_name, major=major, creater_id=me.id, target=target, progress=progress,
              need=need, resume=resume))
     db.session.commit()
 
@@ -61,20 +62,20 @@ def update_team():
     if not me:
         return jsonify(success=1, msg='User not found or not login')
 
-    team_name = request.form['team_name']
+    major = request.form['major']
     manager_name = request.form['manager_name']
     target = request.form['target']
     progress = request.form['progress']
     need = request.form['need']
     resume = request.form['resume']
 
-
-    team=Team.query.filter_by(id=id)
+    team = Team.query.filter_by(id=id).first()
 
     if not team:
         return jsonify(success=1, msg='team id is wrong')
-    team.team_name=team_name
+
     team.manager_name=manager_name
+    team.major = major
     team.target=target
     team.progress=progress
     team.need=need
