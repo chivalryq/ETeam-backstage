@@ -18,24 +18,34 @@ class User(db.Model):
 class Person(db.Model):
     __tablename__='person'
     id=db.Column(db.Integer,primary_key=True)
+
     name=db.Column(db.String(80))
     major=db.Column(db.Integer)
     resume=db.Column(db.Text)
-    expect_competition=db.Column(db.String(50))
+
+    post1 = db.Column(db.Integer)  # 第一志愿
+    post2 = db.Column(db.Integer)  # 第二志愿
+    tech = db.Column(db.String(30))
+    art = db.Column(db.String(30))
+    software = db.Column(db.String(30))
+
+    expect_competition = db.Column(db.Integer)
+
     img_url=db.relationship('PersonImage')
 
-    creater_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    creater_id = db.Column(db.Integer, db.ForeignKey('user.id'))  #外键
 
 class Team(db.Model):
     __tablename__ = 'team'
     id=db.Column(db.Integer,primary_key=True)
 
     manager_name=db.Column(db.String(80))
-    major = db.Column(db.String(10))  # 负责人专业
-    target=db.Column(db.String(20))#比赛
+    major = db.Column(db.Integer)  # 负责人专业
+    target = db.Column(db.Integer)  #比赛
+
     resume = db.Column(db.Text)  # 队伍简介
     progress = db.Column(db.Text)  # 项目进度
-    need = db.Column(db.String(20))  #人员需求
+    need = db.Column(db.String(30))  #人员需求
 
     img_url=db.relationship('TeamImage')
     creater_id=db.Column(db.Integer,db.ForeignKey('user.id'))

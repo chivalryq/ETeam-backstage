@@ -16,10 +16,19 @@ def create_person():
     name=request.form['name']
     major=request.form['major']
     resume=request.form['resume']
+
+    post1 = request.form['post1']
+    post2 = request.form['post2']
+    tech = request.form['tech']
+    art = request.form['art']
+    software = request.form['software']
+
     expect_competition=request.form['expect_competition']
 
-    db.session.add(Person(name=name,major=major,resume=resume,expect_competition=expect_competition))
-
+    db.session.add(Person(name=name, major=major, resume=resume, \
+                          post1=post1, post2=post2, tech=tech, art=art, software=software, \
+                          expect_competition=expect_competition))
+    db.session.commit()
     return jsonify(success=0,msg='create person successfully')
 
 @person_mod.route('/get_person')
