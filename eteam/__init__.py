@@ -28,5 +28,7 @@ app.register_blueprint(person_mod)
 
 @app.cli.command()
 def initdb():
+    # TODO 开发环境删掉drop
+    db.drop_all()
     db.create_all()
-    print("Initializing database")
+    print("Drop and Initializing database")

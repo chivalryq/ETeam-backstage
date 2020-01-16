@@ -20,16 +20,16 @@ class Person(db.Model):
     id=db.Column(db.Integer,primary_key=True)
 
     name=db.Column(db.String(80))
-    major=db.Column(db.Integer)
+    major = db.Column(db.String(10))
     resume=db.Column(db.Text)
 
-    post1 = db.Column(db.Integer)  # 第一志愿
-    post2 = db.Column(db.Integer)  # 第二志愿
+    post1 = db.Column(db.String(10))  # 第一志愿
+    post2 = db.Column(db.String(10))  # 第二志愿
     tech = db.Column(db.String(30))
     art = db.Column(db.String(30))
     software = db.Column(db.String(30))
 
-    expect_competition = db.Column(db.Integer)
+    expect_competition = db.Column(db.String(10))
 
     img_url=db.relationship('PersonImage')
 
@@ -40,8 +40,9 @@ class Team(db.Model):
     id=db.Column(db.Integer,primary_key=True)
 
     manager_name=db.Column(db.String(80))
-    major = db.Column(db.Integer)  # 负责人专业
-    target = db.Column(db.Integer)  #比赛
+    team_name = db.Column(db.String(80))
+    major = db.Column(db.String(10))  # 负责人专业
+    target = db.Column(db.String(10))  # 比赛
 
     resume = db.Column(db.Text)  # 队伍简介
     progress = db.Column(db.Text)  # 项目进度

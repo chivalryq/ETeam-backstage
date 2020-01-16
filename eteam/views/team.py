@@ -38,6 +38,16 @@ def find_all_team():
     return jsonify(success=0,teams=teams,msg='successfully get teams')
 
 
+@team_mod.route('/get_team')
+def get_team():
+    openid = request.form['openid']
+    me = find_user(openid)
+    if not me:
+        return jsonify(success=1, msg='User not found or not login')
+
+    team = Team.query.get(request.form['id'])
+    return jsonify(success=0, team=team, msg='successfully get teams')
+
 @team_mod.route('/delete_team', methods=['POST'])
 def delete_team():
     openid = request.form['openid']
