@@ -35,6 +35,18 @@ class Person(db.Model):
 
     creater_id = db.Column(db.Integer, db.ForeignKey('user.id'))  #外键
 
+    def to_dict(self):
+        model_dict = dict(self.__dict__)
+        model_dict['img_url'] = [item.to_dict() for item in self.img_url]
+        del model_dict['_sa_instance_state']
+        return model_dict
+
+    db.to_dict = to_dict  # 注意:这个跟使用SQLAlchemy的有区别
+
+    # def todict(self):
+    #     return dict(id=self.id,name=self.name,major=self.major,resume=self.resume,post1=self.post1,post2=self.post2,\
+    #                 tech=self.tech,art=self.art,software=self.software,expect_competition=self.expect_competition,\
+    #                 img_url=[item.todict() for item in self.img_url])
 class Team(db.Model):
     __tablename__ = 'team'
     id=db.Column(db.Integer,primary_key=True)
@@ -51,14 +63,38 @@ class Team(db.Model):
     img_url=db.relationship('TeamImage')
     creater_id=db.Column(db.Integer,db.ForeignKey('user.id'))
 
+    def to_dict(self):
+        model_dict = dict(self.__dict__)
+        model_dict['img_url'] = [item.to_dict() for item in self.img_url]
+        del model_dict['_sa_instance_state']
+        return model_dict
+
+    db.to_dict = to_dict  # 注意:这个跟使用SQLAlchemy的有区别
+    # def todict(self):
+    #     return dict(id=self.id,manager_name=self.manager_name,team_name=self.team_name,major=self.major,\
+    #                 target=self.target,resume=self.resume,progress=self.progress,need=self.need, \
+    #                 img_url=[item.todict() for item in self.img_url])
 class TeamImage(db.Model):
     __tablename__ = 'team_image'
     img_id=db.Column(db.Integer,primary_key=True)
-    url=db.String(db.String(255))
+    url = db.Column(db.String(255))
     team_id=db.Column(db.Integer,db.ForeignKey("team.id"))
 
+    def to_dict(self):
+        return dict(img_url=self.url)
+
+    db.to_dict = to_dict  # 注意:这个跟使用SQLAlchemy的有区别
+    # def todict(self):
+    #     return dict(img_id=self.img_id,url=str(self.url),team_id=self.team_id)
 class PersonImage(db.Model):
     __tablename__ = 'person_image'
     img_id = db.Column(db.Integer, primary_key=True)
-    url = db.String(db.String(255))
+    url = db.Column(db.String(255))
     person_id = db.Column(db.Integer, db.ForeignKey("person.id"))
+
+    def to_dict(self):
+        return dict(img_url=self.url)
+
+    db.to_dict = to_dict  # 注意:这个跟使用SQLAlchemy的有区别
+    # def todict(self):
+    #     return dict(img_id=self.img_id,url=str(self.url),person_id=self.person_id)

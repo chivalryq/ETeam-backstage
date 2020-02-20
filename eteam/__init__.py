@@ -1,11 +1,13 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_uploads import UploadSet, configure_uploads
 import click
 import logging
 app = Flask(__name__)
 app.config.from_pyfile('settings.py')
 db=SQLAlchemy(app)
-
+photos = UploadSet('PHOTO')
+configure_uploads(app, photos)
 from .views.user import user_mod
 from .views.team import team_mod
 from .views.person import person_mod
